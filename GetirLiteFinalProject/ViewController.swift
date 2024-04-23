@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     var verticalProducts: [ProductDTO] = []
     var horizontalProducts: [ProductDTO] = []
+    let cartButton = MiniCartView()
     
     private lazy var horizontalCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -42,6 +43,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViews()
+        NotificationCenter.default.addObserver(self, selector: #selector(UpdateCart), name: Notification.Name(rawValue: "CartUpdate"), object: nil)
     }
     
     // MARK: - Private Methods
@@ -113,11 +115,65 @@ class ViewController: UIViewController {
         }
     }
     
+    @objc private func UpdateCart(){
+        var totalCart: Double = Double()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CartItems")
+        fetchRequest.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            if results.count > 0 {
+                for result in results as! [NSManagedObject] {
+                                
+                        
+                    if let priceText = result.value(forKey: "priceText") as? String {
+                        if let quantity = result.value(forKey: "quantity") as? Int {
+                            let withoutCurrencySymbol = priceText.replacingOccurrences(of: "₺", with: "")
+                            let stringWithDoth = withoutCurrencySymbol.replacingOccurrences(of: ",", with: ".")
+                            let price = Double(stringWithDoth) ?? 0.00
+                            totalCart = totalCart + price * Double(quantity)
+                        }
+        
+                    }
+                        
+                    }
+                                
+                }
+
+        } catch {
+            print("error")
+        }
+        let totalCartString = String(format: "%.2f",totalCart)
+        let totalCartWithComma = totalCartString.replacingOccurrences(of: ".", with: ",")
+        cartButton.label.text = "₺\(totalCartWithComma)"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
+    }
+    
+    
 
     private func configureViews() {
+        UINavigationBar.appearance().barTintColor = UIColor(red: 93/255, green: 62/255, blue: 188/255, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        UINavigationBar.appearance().backgroundColor = UIColor(red: 92/255, green: 60/255, blue: 187/255, alpha: 1.0)
+        UINavigationBar.appearance().isHidden = false
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(red: 92/255, green: 60/255, blue: 187/255, alpha: 1.0)
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        
+        navigationController?.navigationBar.backgroundColor = UIColor(red: 92/255, green: 60/255, blue: 187/255, alpha: 1.0)
+        
         title = "Ürünler"
-        let cardButton = MiniCartButton()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cardButton)
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
         view.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
 
         
@@ -210,11 +266,11 @@ class ProductCardCollectionViewCell: UICollectionViewCell {
         productCardView.quantityLabel.text = "\(productDto.quantity)"
         productCardView.idLabel.text = productDto.product.id
         let quantity = productDto.quantity
+        productCardView.minusButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        productCardView.quantityLabel.heightAnchor.constraint(equalToConstant: 32).isActive = true
         if quantity > 0 {
             productCardView.quantityLabel.isHidden = false
             productCardView.minusButton.isHidden = false
-            productCardView.minusButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
-            productCardView.quantityLabel.heightAnchor.constraint(equalToConstant: 32).isActive = true
             
             if quantity > 1 {
                 productCardView.minusButton.setImage(UIImage(systemName: "minus"), for: .normal)

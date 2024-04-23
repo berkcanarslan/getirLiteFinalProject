@@ -279,6 +279,11 @@ class ProductCardView: UIView {
         stepperStackView.heightAnchor.constraint(equalToConstant: containerHeight).isActive = true
         
         layoutIfNeeded()
+        
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "CartUpdate"), object: nil))
+
+
+        
     }
 }
 
