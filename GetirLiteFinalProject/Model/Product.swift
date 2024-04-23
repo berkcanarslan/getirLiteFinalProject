@@ -19,13 +19,13 @@ struct ProductResponseElement: Codable {
 
 // MARK: - Product
 struct Product: Codable {
-    let id: String
-    let name: String
-    let attribute: String?
+    var id: String
+    var name: String
+    var attribute: String?
     let thumbnailURL: String?
     let imageURL: String?
     let price: Double
-    let priceText: String
+    var priceText: String
     let shortDescription: String?
     let category: String?
     let unitPrice: Double?
@@ -34,8 +34,8 @@ struct Product: Codable {
     }
 
 struct ProductDTO {
-    let product: Product
-    let productImage: Data
+    var product: Product
+    var productImage: Data
     var quantity = 0
 }
 

@@ -8,6 +8,7 @@
 import UIKit
 
 class MiniCartView: UIButton {
+    
 
     var cornerRadius: CGFloat = 8 {
         didSet {
@@ -30,6 +31,7 @@ class MiniCartView: UIButton {
     
     private let icon: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "cartLogo"))
+        imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.widthAnchor.constraint(equalToConstant: 34).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 34).isActive = true
@@ -37,6 +39,7 @@ class MiniCartView: UIButton {
     }()
     private let iconView: UIView = {
         let iconView = UIView()
+        iconView.isUserInteractionEnabled = true
         iconView.translatesAutoresizingMaskIntoConstraints = false
         iconView.widthAnchor.constraint(equalToConstant: 34).isActive = true
         iconView.heightAnchor.constraint(equalToConstant: 34).isActive = true
@@ -46,6 +49,7 @@ class MiniCartView: UIButton {
     
     private let amount: UIView = {
         let view = UIView()
+        view.isUserInteractionEnabled = true
         view.layer.cornerRadius = CGFloat(8)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.widthAnchor.constraint(equalToConstant: 80).isActive = true
@@ -56,6 +60,7 @@ class MiniCartView: UIButton {
     
     var label: UILabel = {
         let label = UILabel()
+        label.isUserInteractionEnabled = true
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "₺0,00"
         label.font = UIFont(name: "OpenSans-Bold", size: 14)
@@ -75,12 +80,12 @@ class MiniCartView: UIButton {
     }
     
     private func setupUI() {
+        isUserInteractionEnabled = true
         backgroundColor = .white
         layer.borderWidth = 1
         layer.borderColor = UIColor.white.cgColor
         layer.cornerRadius = cornerRadius
         translatesAutoresizingMaskIntoConstraints = false
-        
         iconView.addSubview(icon)
         self.addSubview(iconView)
         amount.addSubview(label)
@@ -98,5 +103,5 @@ class MiniCartView: UIButton {
             label.centerXAnchor.constraint(equalTo: amount.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: amount.centerYAnchor)
         ])
-    }
+            }
 }

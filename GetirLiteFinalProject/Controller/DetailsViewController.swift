@@ -14,15 +14,19 @@ class DetailsViewController: UIViewController {
     let addToCartButton = UIButton()
     var stepperValueLabel = UILabel()
 
+    override func viewWillAppear(_ animated: Bool) {
+
+    }
 
     override func viewDidLoad() {
         
+
+        
         super.viewDidLoad()
+        
         
         // Customize the navigation bar
         setupNavigationBar()
-        
-        view.backgroundColor = .white
         
 
 
@@ -30,6 +34,8 @@ class DetailsViewController: UIViewController {
                 let productImageView = UIImageView()
                 productImageView.contentMode = .scaleAspectFit
                 productImageView.translatesAutoresizingMaskIntoConstraints = false
+                productImageView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+
                 view.addSubview(productImageView)
 
                 // Product Price
@@ -42,8 +48,10 @@ class DetailsViewController: UIViewController {
 
                 // Product Name
                 let nameLabel = UILabel()
-                nameLabel.font = UIFont.boldSystemFont(ofSize: 24)
+                nameLabel.font = UIFont.boldSystemFont(ofSize: 16)
                 nameLabel.translatesAutoresizingMaskIntoConstraints = false
+                nameLabel.numberOfLines = 3
+                nameLabel.textAlignment = .center
                 view.addSubview(nameLabel)
 
                 // Product Attribute
@@ -65,10 +73,9 @@ class DetailsViewController: UIViewController {
         view.addSubview(addToCartButton)
         stepper.stepValue = 1
         stepper.value = Double(product.quantity)
-        
-stepper.minimumValue = 0
-stepper.translatesAutoresizingMaskIntoConstraints = false
-stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
+        stepper.minimumValue = 0
+        stepper.translatesAutoresizingMaskIntoConstraints = false
+        stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
         view.addSubview(stepper)
                 // Constraints
                 NSLayoutConstraint.activate([
@@ -79,6 +86,8 @@ stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueC
 
                     nameLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 20),
                     nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                    nameLabel.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 20),
+                    nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -20),
 
                     priceLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
                     priceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -87,10 +96,10 @@ stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueC
                     attributeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                     
                     stepper.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                    stepper.topAnchor.constraint(equalTo: attributeLabel.bottomAnchor, constant: 20),
+                    stepper.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
 
                     addToCartButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                    addToCartButton.topAnchor.constraint(equalTo: stepper.bottomAnchor, constant: 20),
+                    addToCartButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
                     stepperValueLabel.centerYAnchor.constraint(equalTo: stepper.centerYAnchor),
                     stepperValueLabel.centerXAnchor.constraint(equalTo: stepper.centerXAnchor),
                     
@@ -104,6 +113,7 @@ stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueC
         nameLabel.text = product.product.name
         priceLabel.text = product.product.priceText
         attributeLabel.text = product.product.attribute
+        stepperValueLabel.text = String(product.quantity)
                 
     }
     func updateUI(){
@@ -120,7 +130,6 @@ stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueC
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
         view.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
 
-
     }
     @objc func stepperValueChanged(_ sender: UIStepper) {
         UpdateProductQuantity(newQuantity: Int(sender.value), productDto: product)
@@ -135,9 +144,16 @@ stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueC
     @objc func addToCartButtonTapped() {
         UpdateProductQuantity(newQuantity: 1, productDto: product)
         product.quantity = 1
+        stepper.value = 1
         updateUI()
         stepperValueLabel.text = String(product.quantity)
     }
+    @objc private func navigateToCart() {
+        print("cart navigate")
+        let cartViewController = CartViewController()
+        navigationController?.pushViewController(cartViewController, animated: true)
+    }
+
     
 
     private func setupNavigationBar() {
@@ -157,6 +173,8 @@ stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueC
 
     @objc private func closeButtonTapped() {
         // Dismiss the details screen when the close button is tapped
+        let MainVC = ViewController()
+        MainVC.UpdateProductQuantity()
         navigationController?.popViewController(animated: true)
     }
 }

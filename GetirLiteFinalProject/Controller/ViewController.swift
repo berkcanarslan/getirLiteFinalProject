@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var verticalProducts: [ProductDTO] = []
     var horizontalProducts: [ProductDTO] = []
     let cartButton = MiniCartView()
+
     
     private lazy var horizontalCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -36,19 +37,29 @@ class ViewController: UIViewController {
     
     // MARK: - Lifecycle Methods
     
+    
     override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(UpdateCart), name: Notification.Name(rawValue: "CartUpdate"), object: nil)
         fetchProducts()
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViews()
-        NotificationCenter.default.addObserver(self, selector: #selector(UpdateCart), name: Notification.Name(rawValue: "CartUpdate"), object: nil)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(navigateToCart))
+        cartButton.addGestureRecognizer(tapGesture)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)    }
+    @objc private func navigateToCart() {
+        print("navigate")
+        let cartViewController = CartViewController()
+        navigationController?.pushViewController(cartViewController, animated: true)
     }
+
     
     // MARK: - Private Methods
     
-    private func UpdateProductQuantity() {
+    func UpdateProductQuantity() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
@@ -150,8 +161,9 @@ class ViewController: UIViewController {
         let totalCartString = String(format: "%.2f",totalCart)
         let totalCartWithComma = totalCartString.replacingOccurrences(of: ".", with: ",")
         cartButton.label.text = "₺\(totalCartWithComma)"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
-    }
+
+        
+            }
     
     
 
@@ -174,8 +186,8 @@ class ViewController: UIViewController {
         
         title = "Ürünler"
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
         view.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+
 
         
         view.addSubview(horizontalCollectionView)
@@ -245,11 +257,20 @@ extension ViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.horizontalCollectionView {
-            let selectedProduct = horizontalProducts[indexPath.item]
+            var selectedProduct = horizontalProducts[indexPath.item]
+
+            if let cell = collectionView.cellForItem(at: indexPath) as? ProductCardCollectionViewCell {
+                selectedProduct.quantity = Int(cell.productCardView.quantityLabel.text!)!
+
+            }
             navigateToProductDetails(with: selectedProduct)
        }
         else {
-            let selectedProduct = verticalProducts[indexPath.item]
+            var selectedProduct = verticalProducts[indexPath.item]
+            if let cell = collectionView.cellForItem(at: indexPath) as? ProductCardCollectionViewCell {
+                selectedProduct.quantity = Int(cell.productCardView.quantityLabel.text!)!
+
+            }
             navigateToProductDetails(with: selectedProduct)
         }
         
@@ -267,7 +288,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 class ProductCardCollectionViewCell: UICollectionViewCell {
     static let identifier = "ProductCardCollectionViewCell"
     
-    private let productCardView = ProductCardView()
+    var productCardView = ProductCardView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

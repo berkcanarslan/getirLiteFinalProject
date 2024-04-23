@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D34B4F112BD803DF00FCE45B /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34B4F102BD803DF00FCE45B /* CoreDataHelper.swift */; };
+		D34B4F132BD82E1A00FCE45B /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34B4F122BD82E1A00FCE45B /* CartViewController.swift */; };
+		D34B4F152BD8405500FCE45B /* CartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34B4F142BD8405500FCE45B /* CartItemCell.swift */; };
 		D3CEFD662BD6812F005CE835 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CEFD652BD6812F005CE835 /* AppDelegate.swift */; };
 		D3CEFD682BD6812F005CE835 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CEFD672BD6812F005CE835 /* SceneDelegate.swift */; };
 		D3CEFD6A2BD6812F005CE835 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CEFD692BD6812F005CE835 /* ViewController.swift */; };
@@ -24,6 +26,8 @@
 
 /* Begin PBXFileReference section */
 		D34B4F102BD803DF00FCE45B /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		D34B4F122BD82E1A00FCE45B /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		D34B4F142BD8405500FCE45B /* CartItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemCell.swift; sourceTree = "<group>"; };
 		D3CEFD622BD6812F005CE835 /* GetirLiteFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetirLiteFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3CEFD652BD6812F005CE835 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3CEFD672BD6812F005CE835 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +95,7 @@
 				D3CEFD7D2BD684AB005CE835 /* ProductCardView.swift */,
 				D3CEFD7F2BD684E3005CE835 /* StepperView.swift */,
 				D3CEFD812BD68504005CE835 /* MiniCartView.swift */,
+				D34B4F142BD8405500FCE45B /* CartItemCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -116,6 +121,7 @@
 			children = (
 				D3CEFD692BD6812F005CE835 /* ViewController.swift */,
 				D3E790492BD7EB77008BE24A /* DetailsViewController.swift */,
+				D34B4F122BD82E1A00FCE45B /* CartViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -193,8 +199,10 @@
 				D3CEFD852BD68F6F005CE835 /* ProductService.swift in Sources */,
 				D3E7904A2BD7EB77008BE24A /* DetailsViewController.swift in Sources */,
 				D3CEFD882BD68FB8005CE835 /* Product.swift in Sources */,
+				D34B4F152BD8405500FCE45B /* CartItemCell.swift in Sources */,
 				D3CEFD702BD6812F005CE835 /* GetirLiteFinalProject.xcdatamodeld in Sources */,
 				D3E7904C2BD7F493008BE24A /* MiniCartHelper.swift in Sources */,
+				D34B4F132BD82E1A00FCE45B /* CartViewController.swift in Sources */,
 				D34B4F112BD803DF00FCE45B /* CoreDataHelper.swift in Sources */,
 				D3CEFD6A2BD6812F005CE835 /* ViewController.swift in Sources */,
 				D3CEFD662BD6812F005CE835 /* AppDelegate.swift in Sources */,

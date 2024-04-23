@@ -260,7 +260,7 @@ class ProductCardView: UIView {
             if newQuantity > 1 {
                 minusButton.setImage(UIImage(systemName: "minus"), for: .normal)
             } else {
-                minusButton.setImage(UIImage(systemName: "xmark.bin"), for: .normal)
+                minusButton.setImage(UIImage(systemName: "trash"), for: .normal)
             }
         } else {
             quantityLabel.isHidden = true
@@ -279,6 +279,7 @@ class ProductCardView: UIView {
         stepperStackView.heightAnchor.constraint(equalToConstant: containerHeight).isActive = true
         
         layoutIfNeeded()
+        
         
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "CartUpdate"), object: nil))
 
