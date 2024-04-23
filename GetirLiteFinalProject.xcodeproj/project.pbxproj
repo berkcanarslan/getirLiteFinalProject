@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D34B4F112BD803DF00FCE45B /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34B4F102BD803DF00FCE45B /* CoreDataHelper.swift */; };
 		D3CEFD662BD6812F005CE835 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CEFD652BD6812F005CE835 /* AppDelegate.swift */; };
 		D3CEFD682BD6812F005CE835 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CEFD672BD6812F005CE835 /* SceneDelegate.swift */; };
 		D3CEFD6A2BD6812F005CE835 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CEFD692BD6812F005CE835 /* ViewController.swift */; };
@@ -17,9 +18,12 @@
 		D3CEFD822BD68504005CE835 /* MiniCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CEFD812BD68504005CE835 /* MiniCartView.swift */; };
 		D3CEFD852BD68F6F005CE835 /* ProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CEFD842BD68F6F005CE835 /* ProductService.swift */; };
 		D3CEFD882BD68FB8005CE835 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CEFD872BD68FB8005CE835 /* Product.swift */; };
+		D3E7904A2BD7EB77008BE24A /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E790492BD7EB77008BE24A /* DetailsViewController.swift */; };
+		D3E7904C2BD7F493008BE24A /* MiniCartHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E7904B2BD7F493008BE24A /* MiniCartHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D34B4F102BD803DF00FCE45B /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		D3CEFD622BD6812F005CE835 /* GetirLiteFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetirLiteFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3CEFD652BD6812F005CE835 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3CEFD672BD6812F005CE835 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,6 +36,8 @@
 		D3CEFD812BD68504005CE835 /* MiniCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniCartView.swift; sourceTree = "<group>"; };
 		D3CEFD842BD68F6F005CE835 /* ProductService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductService.swift; sourceTree = "<group>"; };
 		D3CEFD872BD68FB8005CE835 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		D3E790492BD7EB77008BE24A /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		D3E7904B2BD7F493008BE24A /* MiniCartHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniCartHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,15 +70,17 @@
 		D3CEFD642BD6812F005CE835 /* GetirLiteFinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				D3E790482BD7EB59008BE24A /* Controller */,
 				D3CEFD862BD68FA3005CE835 /* Model */,
 				D3CEFD832BD68F62005CE835 /* Service */,
 				D3CEFD7C2BD68494005CE835 /* View */,
 				D3CEFD652BD6812F005CE835 /* AppDelegate.swift */,
 				D3CEFD672BD6812F005CE835 /* SceneDelegate.swift */,
-				D3CEFD692BD6812F005CE835 /* ViewController.swift */,
 				D3CEFD712BD6812F005CE835 /* Assets.xcassets */,
 				D3CEFD762BD6812F005CE835 /* Info.plist */,
 				D3CEFD6E2BD6812F005CE835 /* GetirLiteFinalProject.xcdatamodeld */,
+				D3E7904B2BD7F493008BE24A /* MiniCartHelper.swift */,
+				D34B4F102BD803DF00FCE45B /* CoreDataHelper.swift */,
 			);
 			path = GetirLiteFinalProject;
 			sourceTree = "<group>";
@@ -101,6 +109,15 @@
 				D3CEFD872BD68FB8005CE835 /* Product.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D3E790482BD7EB59008BE24A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D3CEFD692BD6812F005CE835 /* ViewController.swift */,
+				D3E790492BD7EB77008BE24A /* DetailsViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,8 +191,11 @@
 			files = (
 				D3CEFD822BD68504005CE835 /* MiniCartView.swift in Sources */,
 				D3CEFD852BD68F6F005CE835 /* ProductService.swift in Sources */,
+				D3E7904A2BD7EB77008BE24A /* DetailsViewController.swift in Sources */,
 				D3CEFD882BD68FB8005CE835 /* Product.swift in Sources */,
 				D3CEFD702BD6812F005CE835 /* GetirLiteFinalProject.xcdatamodeld in Sources */,
+				D3E7904C2BD7F493008BE24A /* MiniCartHelper.swift in Sources */,
+				D34B4F112BD803DF00FCE45B /* CoreDataHelper.swift in Sources */,
 				D3CEFD6A2BD6812F005CE835 /* ViewController.swift in Sources */,
 				D3CEFD662BD6812F005CE835 /* AppDelegate.swift in Sources */,
 				D3CEFD682BD6812F005CE835 /* SceneDelegate.swift in Sources */,

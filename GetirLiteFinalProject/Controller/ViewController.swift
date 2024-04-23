@@ -108,6 +108,7 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.UpdateProductQuantity()
                     self.verticalCollectionView.reloadData()
+                    self.UpdateCart()
                 }
             case .failure(let error):
                 print("Error fetching products: \(error)")
@@ -115,7 +116,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc private func UpdateCart(){
+    @objc func UpdateCart(){
         var totalCart: Double = Double()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -204,6 +205,14 @@ class ViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
     }
+    func navigateToProductDetails(with product: ProductDTO) {
+        let detailsVC = DetailsViewController()
+        detailsVC.product = product
+
+        // Push the details view controller onto the navigation stack
+        navigationController?.pushViewController(detailsVC, animated: true)
+    }
+
 }
 
 extension ViewController: UICollectionViewDataSource {
@@ -233,6 +242,17 @@ extension ViewController: UICollectionViewDataSource {
             cell.configure(productDto: productDTO)
             return cell
         }
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == self.horizontalCollectionView {
+            let selectedProduct = horizontalProducts[indexPath.item]
+            navigateToProductDetails(with: selectedProduct)
+       }
+        else {
+            let selectedProduct = verticalProducts[indexPath.item]
+            navigateToProductDetails(with: selectedProduct)
+        }
+        
     }
 }
 
