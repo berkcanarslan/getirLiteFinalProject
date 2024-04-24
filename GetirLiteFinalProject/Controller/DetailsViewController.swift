@@ -17,6 +17,14 @@ class DetailsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
 
     }
+    @objc private func navigateToCart() {
+        if cartButton.tag == 0 {
+            return
+        }
+        let cartViewController = CartViewController()
+        navigationController?.pushViewController(cartViewController, animated: true)
+    }
+
 
     override func viewDidLoad() {
         
@@ -24,6 +32,7 @@ class DetailsViewController: UIViewController {
         
         super.viewDidLoad()
         
+
         
         // Customize the navigation bar
         setupNavigationBar()
@@ -127,6 +136,8 @@ class DetailsViewController: UIViewController {
             addToCartButton.isHidden = false
         }
         cartButton = UpdateCart()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(navigateToCart))
+        cartButton.addGestureRecognizer(tapGesture)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
         view.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
 
@@ -148,11 +159,7 @@ class DetailsViewController: UIViewController {
         updateUI()
         stepperValueLabel.text = String(product.quantity)
     }
-    @objc private func navigateToCart() {
-        print("cart navigate")
-        let cartViewController = CartViewController()
-        navigationController?.pushViewController(cartViewController, animated: true)
-    }
+
 
     
 
@@ -166,7 +173,7 @@ class DetailsViewController: UIViewController {
 
         // Assign the custom button as the left bar button item
         navigationItem.leftBarButtonItem = closeBarButtonItem
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
+
         view.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
 
     }

@@ -55,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D3C0277A2BD9865F00D76BDA /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				D34B4F102BD803DF00FCE45B /* CoreDataHelper.swift */,
+				D3E7904B2BD7F493008BE24A /* MiniCartHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		D3CEFD592BD6812F005CE835 = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +83,7 @@
 		D3CEFD642BD6812F005CE835 /* GetirLiteFinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				D3C0277A2BD9865F00D76BDA /* Helper */,
 				D3E790482BD7EB59008BE24A /* Controller */,
 				D3CEFD862BD68FA3005CE835 /* Model */,
 				D3CEFD832BD68F62005CE835 /* Service */,
@@ -83,8 +93,6 @@
 				D3CEFD712BD6812F005CE835 /* Assets.xcassets */,
 				D3CEFD762BD6812F005CE835 /* Info.plist */,
 				D3CEFD6E2BD6812F005CE835 /* GetirLiteFinalProject.xcdatamodeld */,
-				D3E7904B2BD7F493008BE24A /* MiniCartHelper.swift */,
-				D34B4F102BD803DF00FCE45B /* CoreDataHelper.swift */,
 			);
 			path = GetirLiteFinalProject;
 			sourceTree = "<group>";

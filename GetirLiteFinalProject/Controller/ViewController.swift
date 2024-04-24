@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var verticalProducts: [ProductDTO] = []
     var horizontalProducts: [ProductDTO] = []
     let cartButton = MiniCartView()
+    var totalCartAmount = Double()
 
     
     private lazy var horizontalCollectionView: UICollectionView = {
@@ -51,7 +52,9 @@ class ViewController: UIViewController {
         cartButton.addGestureRecognizer(tapGesture)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)    }
     @objc private func navigateToCart() {
-        print("navigate")
+        if totalCartAmount == 0 {
+            return
+        }
         let cartViewController = CartViewController()
         navigationController?.pushViewController(cartViewController, animated: true)
     }
@@ -147,6 +150,7 @@ class ViewController: UIViewController {
                             let stringWithDoth = withoutCurrencySymbol.replacingOccurrences(of: ",", with: ".")
                             let price = Double(stringWithDoth) ?? 0.00
                             totalCart = totalCart + price * Double(quantity)
+                            totalCartAmount = totalCart
                         }
         
                     }
@@ -161,7 +165,7 @@ class ViewController: UIViewController {
         let totalCartString = String(format: "%.2f",totalCart)
         let totalCartWithComma = totalCartString.replacingOccurrences(of: ".", with: ",")
         cartButton.label.text = "₺\(totalCartWithComma)"
-
+        
         
             }
     

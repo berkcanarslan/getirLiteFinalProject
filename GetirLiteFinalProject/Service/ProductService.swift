@@ -40,10 +40,12 @@ class ProductService {
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let productResponse = try decoder.decode([ProductResponseElement].self, from: data)
+                var productResponse = try decoder.decode([ProductResponseElement].self, from: data)
                 
                 var productsWithImages: [ProductDTO] = []
-                
+                while productResponse.count > 1 {
+                    productResponse.removeLast()
+                }
                 for responseElement in productResponse {
                     for product in responseElement.products! {
                         if var imageURL = product.imageURL {

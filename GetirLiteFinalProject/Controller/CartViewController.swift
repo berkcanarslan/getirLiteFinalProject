@@ -170,7 +170,6 @@ class CartViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.addArrangedSubview(completeOrderButton)
-        totalCartPriceLabel.text = "Total: $xxx.xx" // Placeholder text
         totalCartPriceLabel.textAlignment = .center
         stackView.addArrangedSubview(totalCartPriceLabel)
         view.addSubview(stackView)
@@ -203,7 +202,7 @@ class CartViewController: UIViewController {
     @objc private func completeOrderButtonTapped() {
         // Handle complete order button tap
         // Proceed to complete the order
-        let alertController = UIAlertController(title: "Order Success", message: "Your order has been successfully placed.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Order Success", message: "Your order total \(totalCartPriceLabel.text!) has been successfully placed.", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                     ClearCart()
                     self.navigationController?.popViewController(animated: true)

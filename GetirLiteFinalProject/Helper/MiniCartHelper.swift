@@ -44,5 +44,6 @@ func UpdateCart() -> MiniCartView {
     let totalCartString = String(format: "%.2f",totalCart)
     let totalCartWithComma = totalCartString.replacingOccurrences(of: ".", with: ",")
     cartButton.label.text = "₺\(totalCartWithComma)"
+    cartButton.tag = Int(totalCart)
     return cartButton
 }
