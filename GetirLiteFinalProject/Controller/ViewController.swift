@@ -52,11 +52,15 @@ class ViewController: UIViewController {
         cartButton.addGestureRecognizer(tapGesture)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)    }
     @objc private func navigateToCart() {
-        if totalCartAmount == 0 {
-            return
+        if cartButton.label.text == "₺0,00" {
+            navigationItem.rightBarButtonItem?.isEnabled = true
         }
-        let cartViewController = CartViewController()
-        navigationController?.pushViewController(cartViewController, animated: true)
+        else {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+            let cartViewController = CartViewController()
+            navigationController?.pushViewController(cartViewController, animated: true)
+
+        }
     }
 
     

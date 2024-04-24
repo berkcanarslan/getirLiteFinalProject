@@ -146,6 +146,8 @@ class CartViewController: UIViewController {
     func setupCartItems() {
         getCartProducts { [weak self] cartProducts in
             self?.products = cartProducts
+            if self?.products.count == 0 {
+                self?.navigationController?.popViewController(animated: true)            }
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
             }
